@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en-US">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Web store</title>
+	</head>
+	<body>
+		<header></header>
+		<main>
+			<section id="grid-container"></section>
+		</main>
+		<style>
+			body {
+				background-color: pink;
+			}
+			.product-title {
+				color: white;
+			}
+			.product-desc {
+				
+			}
+			.grid-item {
+				
+			}
+		</style>
+		<script>
+			class Product {
+				constructor(title, desc) {
+					this.title = title;
+					this.desc = desc;
+				}
+			}
+			let products = [
+					new Product("Apple", "A fruit"),
+					new Product("Orange", "A fruit"),
+					new Product("Banana", "A fruit"),
+					new Product("Kiwi", "A fruit")
+			];
+			let main = document.getElementsByTagName("main")[0];
+			for(i = 0; i < products.length; i++){
+				let div = document.createElement("div");
+				div.class = "grid-item";
+				main.appendChild(div);
+				main.getElementsByTagName("div")[i].innerHTML =
+						"<p class=\"product-title\">" + products[i].title + "</p><pclass=\"product-desc\">" + products[i].desc + "</p>";
+			}
+		</script>
+	</body>
+</html>
