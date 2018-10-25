@@ -3,24 +3,33 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/meyers-reset.css">
 		<title>Web store</title>
 	</head>
 	<body>
-		<header></header>
+		<header>
+			
+		</header>
 		<main>
 			<section id="grid-container"></section>
 		</main>
 		<style>
 			body {
-				background-color: pink;
+				
 			}
-			.product-title {
-				color: white;
+			header {
+				
 			}
-			.product-desc {
+			#grid-container {
 				
 			}
 			.grid-item {
+				
+			}
+			.product-title {
+				
+			}
+			.product-desc {
 				
 			}
 		</style>
@@ -31,19 +40,20 @@
 					this.desc = desc;
 				}
 			}
-			let products = [
+			const products = [
 					new Product("Apple", "A fruit"),
 					new Product("Orange", "A fruit"),
 					new Product("Banana", "A fruit"),
 					new Product("Kiwi", "A fruit")
 			];
-			let main = document.getElementsByTagName("main")[0];
+			let gridContainer = document.getElementById("grid-container");
 			for(i = 0; i < products.length; i++){
 				let div = document.createElement("div");
-				div.class = "grid-item";
-				main.appendChild(div);
-				main.getElementsByTagName("div")[i].innerHTML =
-						"<p class=\"product-title\">" + products[i].title + "</p><pclass=\"product-desc\">" + products[i].desc + "</p>";
+				div.setAttribute("class", "grid-item");
+				gridContainer.appendChild(div);
+				gridContainer.getElementsByTagName("div")[i].innerHTML =
+						"<p class=\"product-title\">" + products[i].title + "</p>" +
+						"<p class=\"product-desc\">" + products[i].desc + "</p>";
 			}
 		</script>
 	</body>
