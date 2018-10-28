@@ -8,7 +8,9 @@
 	</head>
 	<body>
 		<header>
+			<!-- The name of the page is displayed in the upper left corner and takes the user to the front page -->
 			<a id="name" href="">Web store</a>
+			<!-- The navigation buttons on top of the page, with buttons to display product categories -->
 			<nav>
 				<button class="menu" onclick="writeProducts(platforms.PS4)">PS4</button>
 				<button class="menu" onclick="writeProducts(platforms.XBOX_ONE)">XBOX ONE</button>
@@ -16,12 +18,14 @@
 			</nav>
 		</header>
 		<main>
+			<!-- Grid to be filled in with products by JavaScript -->
 			<section class="grid-container"></section>
 		</main>
 		<style>
 			body {
 				font-family: arial;
 			}
+			/* The header scrolls down with the page */
 			header {
 				z-index: 1;
 				position: fixed;
@@ -29,6 +33,7 @@
 				background-color: #5588AA;
 				padding: 10px;
 			}
+			/* The name of the website displayed in the header */
 			#name {
 				position: absolute;
 				top: 50%;
@@ -39,9 +44,11 @@
 				text-decoration: none;
 				padding: 2px;
 			}
+			/* The navigation menu displayed in the header */
 			header nav {
 				text-align: center;
 			}
+			/* Menu-buttons used for setting product-category */
 			.menu {
 				font-size: 25px;
 				background-color: transparent;
@@ -58,16 +65,19 @@
 				background-color: white;
 				color: #5588AA;
 			}
+			/* Main content of page. Everything else than header */
 			main {
 				position: relative;
 				top: 80px;
 				width: 60%;
 				margin: auto;
 			}
+			/* The grid containing products to buy. Displayed in 3 columns */
 			.grid-container {
 				display: grid;
 				grid-template-columns: repeat(3, 1fr);
 			}
+			/* A product-container in the grid */
 			.grid-item {
 				position: relative;
 				padding: 20px;
@@ -79,10 +89,12 @@
 			.grid-item:hover {
 				box-shadow: 0px 0px 5px grey;
 			}
+			/* Text that links to something is displayed like normal text */
 			.product-url {
 				color: black;
 				text-decoration: none;
 			}
+			/* Displays product-image correctly */
 			.product-img-container {
 				position: relative;
 				left: 50%;
@@ -92,6 +104,7 @@
 				height: 250px;
 				overflow: hidden;
 			}
+			/* Displays product-image inside container */
 			.product-img {
 				position: absolute;
 				left: 50%;
@@ -101,12 +114,14 @@
 				max-width: 100%;
 				max-height: 100%;
 			}
+			/* Title is centered beneath the product-image */
 			.product-title {
 				text-align: center;
 				font-size: 20px;
 				font-weight: 900;
 				margin: 10px;
 			}
+			/* Container for price, availability and buy-button for a product. Container is always on the bottom of the grid-item */
 			.product-buy-info {
 				position: absolute;
 				bottom: 10px;
@@ -114,19 +129,23 @@
 				transform: translateX(-50%);
 				-webkit-transform: translateX(-50%);
 			}
+			/* Price for a product */
 			.product-price {
 				font-size: 30px;
 				text-align: center;
 				margin: 10px 0;
 			}
+			/* Appends "kr" to price */
 			.product-price:after {
 				content: " kr";
 				font-size: 20px;
 			}
+			/* Displays the availability of a product */
 			.product-available {
 				text-align: center;
 				margin: 10px 0;
 			}
+			/* Buy-button for a product */
 			.product-buy-button {
 				position: relative;
 				left: 50%;
@@ -148,6 +167,7 @@
 			}
 		</style>
 		<script>
+			//Class that defines a product
 			class Product {
 				constructor(platform, url, imgURL, title, price, available) {
 					this.platform = platform;
@@ -158,12 +178,14 @@
 					this.available = available;
 				}
 			}
+			//Definition of different game-platforms. "ALL" means all of them
 			const platforms = {
 				ALL: 0,
 				PS4: 1,
 				XBOX_ONE: 2,
 				NINTENDO_SWITCH: 3
 			};
+			//Array of product-information. In a real setting we would import this information form a file or database instead of hard-coding it
 			const products = [
 					new Product(platforms.PS4, "#", "Dark-Souls-PS4.jpg", "Dark Souls Remastered", 299, 0),
 					new Product(platforms.PS4, "#", "Final-Fantasy-XV-PS4.jpg", "Final Fantasy XV", 199, 13),
@@ -175,27 +197,34 @@
 					new Product(platforms.NINTENDO_SWITCH, "#", "Xenoblade-Chronicles-2-Switch.jpg", "Xenoblade Chronicles 2", 399, 0),
 					new Product(platforms.NINTENDO_SWITCH, "#", "Zelda-Breath-Of-The-Wild-Switch.jpg", "The Legend of Zelda: Breath of the Wild", 549, 33)
 			];
+			//Makes a popup message that tells the user that they bought a product
 			function buy(title) {
 				window.alert("Du kjøpte " + title);
 			}
+			//Writes all the product-info as HTML into the grid
 			function writeProducts(platform) {
+				//Products to display based on platform
 				let activeProducts = [];
 				for(i = 0; i < products.length; i++) {
 					if(platform === platforms.ALL || products[i].platform === platform) {
 						activeProducts.push(products[i]);
 					}
 				}
+				//Gets the grid-container from DOM
 				let gridContainer = document.getElementsByClassName("grid-container")[0];
+				//Empties the grid incase there is already written objects into it
 				gridContainer.innerHTML = "";
 				for(i = 0; i < activeProducts.length; i++) {
 					let div = document.createElement("div");
 					div.setAttribute("class", "grid-item");
 					let available = "Ikke på lager";
+					//Sets the availability-color and how many is available
 					let availabilityColor = "red";
 					if(activeProducts[i].available > 0) {
 						available = activeProducts[i].available + " stk. på lager";
 						availabilityColor = "green";
 					}
+					//Writes the product-info into the grid-item
 					div.innerHTML =
 							"<a class=\"product-url\" href=\"" + activeProducts[i].url + "\">" +
 								"<div class=\"product-img-container\">" +
@@ -209,9 +238,11 @@
 								"<button class=\"product-buy-button\" onclick=\"buy('" + activeProducts[i].title + "')\">Kjøp</button>" +
 							"</div>";
 					div.getElementsByClassName("product-available")[0].style.color = availabilityColor;
+					//Adds the grid-item to the grid
 					gridContainer.appendChild(div);
 				}
 			}
+			//Writes all products when entering the page
 			writeProducts(platforms.ALL);
 		</script>
 	</body>
