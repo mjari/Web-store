@@ -217,12 +217,16 @@
 				for(i = 0; i < activeProducts.length; i++) {
 					let div = document.createElement("div");
 					div.setAttribute("class", "grid-item");
-					let available = "Ikke på lager";
+					let available;
+					let availabilityColor;
 					//Sets the availability-color and how many is available
-					let availabilityColor = "red";
 					if(activeProducts[i].available > 0) {
 						available = activeProducts[i].available + " stk. på lager";
 						availabilityColor = "green";
+					}
+					else {
+						available = "Ikke på lager";
+						availabilityColor = "red";
 					}
 					//Writes the product-info into the grid-item
 					div.innerHTML =
